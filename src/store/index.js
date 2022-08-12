@@ -24,7 +24,10 @@ export default new Vuex.Store({
     },
     sum(state, getter) {
       return   getter.list.length
-     }
+    },
+    checkAll(state, getter) { 
+      return getter.list.every(item => item.done === true)
+    }
   },
   plugins: [createPersistedState({
     key: "myToDoList",

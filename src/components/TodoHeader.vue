@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <h1>todos</h1>
-    <input id="toggle-all" class="toggle-all" type="checkbox" >
+    <input id="toggle-all" class="toggle-all" type="checkbox" :checked="checkAll" @change="checkDone">
     <label for="toggle-all"></label>
     <input
       class="new-todo"
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations,mapGetters } from 'vuex';
 // 第四种
 // const { mapMutations} = createNamespacedHelpers("header")
 export default {
@@ -28,7 +28,7 @@ export default {
     // ...mapMutations(['header/changeThing']),
     // 第三种
     ...mapMutations("header", ["changeThing"]),
-      ...mapMutations("main",["addTodo"]),
+      ...mapMutations("main",["addTodo",'changeAll']),
     // 第四种
     // ...mapMutations(["changeThing"]),
     btn() { 
@@ -44,9 +44,14 @@ export default {
         
       })
       this.msg = ""
-
-     
+    },
+    checkDone() {
+      const condition = this.checkAll
+     this.changeAll(!condition)
     }
+  },
+  computed: {
+    ...mapGetters(["checkAll"])
   }
 }
 </script>

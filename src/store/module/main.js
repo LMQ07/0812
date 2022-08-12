@@ -22,7 +22,13 @@ export default {
     // 清空已完成
     clearDone(state) {
       state.todoList= state.todoList.filter(item => !item.done)
-     }
+    },
+    // 修改全选
+    changeAll(state, condition) { 
+      state.todoList.forEach(element => {
+        element.done= condition
+      });
+    },
   },
   actions: {}
 }
